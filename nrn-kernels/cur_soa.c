@@ -19,10 +19,7 @@ void Na_cur_soa() {
     int i;
     double rhs, v, dina;
 
-    #pragma ivdep
-    #pragma vector always
-    #pragma clang loop vectorize(assume_safety)
-    for (i = 0; i < _cntml; i++) {
+Na_cur_soa:for (i = 0; i < _cntml; i++) {
         int id = index_array[i];
         v = VEC_V[id];
         p_5[i] = ppvar0[i];
@@ -88,11 +85,11 @@ int main() {
     Na_cur_soa();
 
     // Print result
-    printf("Results after Na::cur_soa():\n");
+    /*printf("Results after Na::cur_soa():\n");
     for (int i = 0; i < NUM_INSTANCES; i++) {
         printf("i=%2d V=%.2f  I_Na=%.5f  dI/dV=%.5f  VEC_RHS=%.5f\n",
                i, VEC_V[i], ppvar1[i], ppvar2[i], VEC_RHS[i]);
-    }
+    }*/
 
     // Cleanup
     free(index_array);

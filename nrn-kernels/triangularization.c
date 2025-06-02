@@ -12,7 +12,7 @@ void triangularization() {
     double p;
 
     // Triangularization step (backward elimination)
-    for (i = ncompartments - 1; i >= ncells; --i) {
+triangularization:for (i = ncompartments - 1; i >= ncells; --i) {
         p = vec_a[i] / vec_d[i];
         vec_d[parent_index[i]] -= p * vec_b[i];
         vec_rhs[parent_index[i]] -= p * vec_rhs[i];
@@ -54,18 +54,18 @@ int main() {
         parent_index[i] = (i < ncells) ? i : (i - 1); // simple parent relationship
     }
 
-    printf("Before triangularization:\n");
+    /*printf("Before triangularization:\n");
     for (i = 0; i < ncompartments; i++) {
         printf("i=%d, a=%.2f, b=%.2f, d=%.2f, rhs=%.2f, parent=%d\n",
                i, vec_a[i], vec_b[i], vec_d[i], vec_rhs[i], parent_index[i]);
-    }
+    }*/
 
     triangularization();
 
-    printf("\nAfter triangularization:\n");
+    /*printf("\nAfter triangularization:\n");
     for (i = 0; i < ncompartments; i++) {
         printf("i=%d, rhs=%.6f\n", i, vec_rhs[i]);
-    }
+    }*/
 
     // Free memory
     free(vec_a);
